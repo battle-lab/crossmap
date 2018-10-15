@@ -6,7 +6,7 @@ Cross-mappability from gene A to gene B, crossmap(A,B), is defined as the number
 
 ### Compute cross-mappability
 * [Pre-requisites](https://github.com/battle-lab/crossmap/blob/master/prerequisites.md)
-* [Compute cross-mappability step-by-step](master/compute_crossmap.md)
+* [Compute cross-mappability step-by-step](https://github.com/battle-lab/crossmap/blob/master/compute_crossmap.md)
 
 ### Download 
 You may download already computed cross-mappability resources for human genome (hg19 and GRCh38) from [here](http://bit.ly/mappability).
