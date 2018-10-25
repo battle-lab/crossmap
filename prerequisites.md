@@ -67,3 +67,5 @@ Further instructions to convert bigwig files are available [here](https://genome
 #### Bowtie index
 Bowtie index files are required to align k-mers to the genome. You may either download prebuilt bowtie indexes from the [bowtie website](http://bowtie-bio.sourceforge.net/index.shtml) or create an index using for your genome following instructions from the bowtie wesbite.
 
+### Note
+Input parsing is pretty basic, so please try to match the format with the given examples.
