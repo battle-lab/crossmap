@@ -24,9 +24,11 @@ chr1	27	43	0.5
 Here, the first 10 k-mers have a mappability of 0.25, next 17 k-mers have a mappability of 1, and the next 16 k-mers have a mappability of 0.5. Note: a track definition line is not expected.
 
 #### bigwig to bedgraph
-If you have k-mer mappabilities in a [bigWig](https://genome.ucsc.edu/goldenpath/help/bigWig.html) file, you may easily convert it into a bedgraph file using the following code:
+If you have k-mer mappabilities in a [bigWig](https://genome.ucsc.edu/goldenpath/help/bigWig.html) file, you may easily convert it into a bedgraph file using the following shell script:
 ```
-bigWigToBedGraph /scratch1/battle-fs1/ashis/progdata/mappability/wgEncodeCrgMapabilityAlign75mer.bigWig /scratch1/battle-fs1/ashis/progdata/mappability/wgEncodeCrgMapabilityAlign75mer.bed
+bigwig_fn="mappability.bigwig"  # filename (with path) of your bigwig file
+bedgraph_fn="mappability.bed"   # filename (with path) of the bed file
+bigWigToBedGraph  "$bedgraph_fn" "$bedgraph_fn"
 ```
 Further instructions to convert bigwig files are available [here](https://genome.ucsc.edu/goldenpath/help/bigWig.html). Mappabilities of k-mers in human genome hg19 are available [here](http://bit.ly/hg19_mappability) in bigwig files.
 
