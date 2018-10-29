@@ -120,8 +120,8 @@ get_subdir <- function(gid, out_dir, dir_name_len){
 ### function to get kmer files for a gene
 get_kmer_file_names <- function(gid, out_dir, dir_name_len){
   out_subdir = get_subdir(gid, out_dir = out_dir, dir_name_len = dir_name_len)
-  text_fn = paste0(out_subdir, '/',  gid, '.txt')
-  fasta_fn = paste0(out_subdir, '/',  gid, '.fa')
+  text_fn = paste0(out_subdir, '/',  gid, '.kmer.txt')
+  fasta_fn = paste0(out_subdir, '/',  gid, '.kmer.fa')
   count_fn = paste0(out_subdir, '/',  gid, '.count.txt')
   return(list(text_fn = text_fn, fasta_fn = fasta_fn, count_fn = count_fn))
 }
