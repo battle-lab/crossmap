@@ -108,8 +108,11 @@ annot_df = fread(input = annot_fn, sep='\t', header=T, stringsAsFactors = F, dat
 annotation_formatted <- annot_df[annot_df$feature == 'UTR' | annot_df$feature == 'exon', ]
 
 ##### filter genes: n1-th to n2-th gene in the mappability data
+if(n1>nrow(mappability))
+  stop(sprintf('n1 (=%d) is greater than the number of genes (=%d) in the mappability file: %s', n1, nrow(mappability), mappability_fn))
+
 if(n1>=1 && n2>=1){
-  target_mappability <- mappability[n1:n2, , drop = F]
+  target_mappability <- mappability[n1:min(n2, nrow(mappability)), , drop = F]
   target_genes <- target_mappability[!is.na(target_mappability$mappability) &  target_mappability$mappability < 1, 'gene']
 } else {
   target_genes <- mappability[!is.na(mappability$mappability)  &  mappability$mappability < 1, 'gene']
