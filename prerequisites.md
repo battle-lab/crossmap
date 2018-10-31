@@ -6,9 +6,13 @@ The following items are required to compute cross-mappability genomewide.
 - Bowtie index for the genome
 
 ### Software requirements
-- R
-- bowtie v1
 - Linux
+- R
+  - Please make sure the path variable includes the location for `Rscript`.
+  - Please make sure the following R packages are installed: data.table, stringr, intervals, argparser, stats, 
+- bowtie v1
+  - Please make sure the path variable includes the location for `bowtie`.
+
 
 #### Genome sequences
 The genome sequences should be stored in a directory. The genome sequence for each chromosome should be in a fasta file in a directory. The file name for each chromosome should be CHRNAME.fa. For example, file names for human genome would look like below
