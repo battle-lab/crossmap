@@ -200,7 +200,7 @@ load_chromosomes <- function(chromosomes){
 
 ##### align and compute cross-mappability from each gene
 find_and_save_cross_mappability <- function(g, chromosomes, delete_alignment=F, append_conflict=F){
-  verbose_print(paste('finding conflicts with gene ', g))
+  verbose_print(paste('computing cross-mappability from gene ', g, ' to genes in ', paste0(chromosomes, collapse = ',') ))
   ### align kmers of gene g
   kmer_subdir = get_subdir(gid = g, out_dir = kmer_dir, dir_name_len = dir_name_len)
   alignment_subdir = get_subdir(gid = g, out_dir = alignment_dir, dir_name_len = dir_name_len)
