@@ -213,7 +213,11 @@ find_and_save_cross_mappability <- function(g, chromosomes, delete_alignment=F, 
     system(align_cmd)
   }
   
-  align_dt <- fread(input = align_fn, sep = '\t', header = F, stringsAsFactors = T, colClasses = c('integer', 'character', 'integer'), col.names = c('kmer', 'chr', 'pos'), data.table = T)
+  align_dt <- tryCatch(fread(input = align_fn, sep = '\t', header = F, stringsAsFactors = T, colClasses = c('integer', 'character', 'integer'), col.names = c('kmer', 'chr', 'pos'), data.table = T),
+                        error=function(e){
+                                stop(sprintf('problem in reading a bowtie alignment file: %s.\nplease delete the alignment file and check bowtie settings.', align_fn))
+                                return()
+                              })
   align_dt$kmer= align_dt$kmer+1  # convert to 1-based k-mer index
     
   # read k-mer occurences from file
