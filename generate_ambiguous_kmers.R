@@ -34,7 +34,7 @@ args <- add_argument(args, '-th2',
                      help='ending appability threshold. genes w/ avg mappability < th2 are included.',
                      default=1.0)
 args <- add_argument(args, '-dir_name_len',
-                     help='length of the sub-directory names. First dir_name_len letters from gene form the name.',
+                     help='length of the sub-directory names. First dir_name_len letters from gene form the subdirectory name.',
                      default=12)
 args <- add_argument(args, '-verbose', 
                      help='show computation status if verbose > 0',
