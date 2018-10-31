@@ -324,4 +324,4 @@ ENSG00000000003.10      ENSG00000011465.12      19
 ENSG00000000003.10      ENSG00000053524.7       19
 ENSG00000000003.10      ENSG00000059804.11      14
 ```
-According to the above cross-mappability file, 2 k-mers from ENSG00000000003.10 map to ENSG00000008394.8, allowing for pre-configured number of mismatches. Note: Only genes with mappability < 1 (not NA) appear in cross mapping files. Cross-mappability to/from a gene with mappability of NA is indeterminable (NA). Cross-mappability between any gene pair not present in the above file is 0.
+According to the above cross-mappability file, 2 k-mers from ENSG00000000003.10 map to ENSG00000008394.8, allowing for pre-configured number of mismatches. Note: Only genes with mappability < 1 (not NA) appear here. Cross-mappability to/from a gene with mappability of NA is indeterminable (NA). Cross-mappability between any gene pair not present in the above file is 0.
