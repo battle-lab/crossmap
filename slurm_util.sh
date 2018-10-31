@@ -55,8 +55,8 @@ submit_slurm_job()
   # slurm header
   script_dir="$(dirname "$script_fn")"
   job_name="$(basename "$script_fn")"
-  slrum_job_fn="${script_fn}.slrum"
-  cmd_header=$(get_slurm_header ${partition} ${script_dir} ${time} ${nodes} ${ntasks} ${mem} ${job_name} "${slrum_job_fn}.%%j.out" "${slrum_job_fn}.%%j.err")
+  slurm_job_fn="${script_fn}.slurm"
+  cmd_header=$(get_slurm_header ${partition} ${script_dir} ${time} ${nodes} ${ntasks} ${mem} ${job_name} "${slurm_job_fn}.%%j.out" "${slurm_job_fn}.%%j.err")
 
   # slurm modules
   cmd_modules="module load R"
@@ -67,13 +67,13 @@ submit_slurm_job()
   cmd_body="sh \"$script_fn\""
   cmd_body="$cmd_body\necho DONE"
 
-  # save slrum job
-  echo -e "$cmd_header" > $slrum_job_fn
-  echo -e "$cmd_modules" >> $slrum_job_fn
-  echo -e "$cmd_body" >> $slrum_job_fn
+  # save slurm job
+  echo -e "$cmd_header" > $slurm_job_fn
+  echo -e "$cmd_modules" >> $slurm_job_fn
+  echo -e "$cmd_body" >> $slurm_job_fn
   
-  # submit slrum job
-  sbatch $slrum_job_fn
+  # submit slurm job
+  sbatch $slurm_job_fn
   
   return 0
 }
