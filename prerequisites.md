@@ -1,22 +1,7 @@
 ### Input requirements
 The following items are required to compute cross-mappability genomewide.
-- Genome sequences (one fasta file for each chromosome)
-- Gene annotation file (Format: GTF)
-- Mappability of each k-mer (Format: bedgraph or bigWig)
-- Bowtie index for the genome
-
-### Software requirements
-- Linux
-- R
-  - Please make sure the path variable includes the location for `Rscript`.
-  - Please make sure the following R packages are installed: data.table, stringr, intervals, argparser, stats, 
-- bowtie v1
-  - Please make sure the path variable includes the location for `bowtie`.
-
-Note: The program has been tested on CentOS Linux (64 bit) using R v3.5.1 and bowtie v1.2.2.
-
-#### Genome sequences
-The genome sequences should be stored in a directory. The genome sequence for each chromosome should be in a fasta file in a directory. The file name for each chromosome should be CHRNAME.fa. For example, file names for human genome would look like below
+#### Genome sequences (Format: FASTA)
+The genome sequences should be stored in a directory. The genome sequence for each chromosome should be in a fasta file in a directory. The file name for each chromosome should be CHRNAME.fa. For example, file names for human genome would look like below:
 ```
 chr10.fa  chr14.fa  chr18.fa  chr21.fa  chr4.fa  chr8.fa  chrY.fa
 chr11.fa  chr15.fa  chr19.fa  chr22.fa  chr5.fa  chr9.fa
@@ -37,7 +22,7 @@ gagaggcagaaaatgatatctcatagttgctttactttgcatattttAAA
 ATTGTGACTTTCATGGCATAAATAATACTGGTTTATTACAGAAGCACTAG
 ```
 
-#### Gene annotation file
+#### Gene annotation file (Format: GTF)
 A tab-delimited [Gencode gtf](https://www.gencodegenes.org/pages/data_format.html) file containing gene annotations is required. You may download comprehensive gene annotations for human and mouse from [Gencode website](https://www.gencodegenes.org/). The gene annotation file should look like below:
 ```
 ##description: evidence-based annotation of the human genome (GRCh37), version 19 (Ensembl 74)
@@ -50,7 +35,7 @@ chr1    HAVANA  transcript      11869   14409   .       +       .       gene_id 
 chr1    HAVANA  exon    11869   12227   .       +       .       gene_id "ENSG00000223972.4"; transcript_id "ENST00000456328.2"; gene_type "pseudogene"; gene_status "KNOWN"; gene_name "DDX11L1"; transcript_type "processed_transcript"; transcript_status "KNOWN"; transcript_name "DDX11L1-002"; exon_number 1; exon_id "ENSE00002234944.1"; level 2; tag "basic"; havana_gene "OTTHUMG00000000961.2"; havana_transcript "OTTHUMT00000362751.1";
 ```
 
-#### Mappability of each k-mer
+#### Mappability of each k-mer (Format: BEDGRAPH or BIGWIG)
 A tab-delimitted [bedgraph](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) file containing the mappability of each k-mer is required. The bedgraph file should have 4 columns: chr, start_pos, end_pos, mappability. The bedgraph file should look like below:
 ```
 chr1	0	10	0.25
@@ -59,8 +44,7 @@ chr1	27	43	0.5
 ```
 Here, the first 10 k-mers have a mappability of 0.25, next 17 k-mers have a mappability of 1, and the next 16 k-mers have a mappability of 0.5. Note: a track definition line is not expected.
 
-#### bigwig to bedgraph
-If you have k-mer mappabilities in a [bigWig](https://genome.ucsc.edu/goldenpath/help/bigWig.html) file, you may easily convert it into a bedgraph file using the following shell script:
+bigwig to bedgraph: If you have k-mer mappabilities in a [bigWig](https://genome.ucsc.edu/goldenpath/help/bigWig.html) file, you may easily convert it into a bedgraph file using the following shell script:
 ```
 bigwig_fn="mappability.bigwig"  # filename (with path) of your bigwig file
 bedgraph_fn="mappability.bed"   # filename (with path) of the bed file
@@ -72,5 +56,15 @@ Further instructions to convert bigwig files are available [here](https://genome
 #### Bowtie index
 Bowtie index files are required to align k-mers to the genome. You may either download prebuilt bowtie indexes from the [bowtie website](http://bowtie-bio.sourceforge.net/index.shtml) or create an index using for your genome following instructions from the bowtie wesbite.
 
-### Note
-Input parsing is pretty basic, so please try to match the format with the given examples.
+
+### Software requirements
+- Linux
+- R
+  - Please make sure the path variable includes the location for `Rscript`.
+  - Please make sure the following R packages are installed: data.table, stringr, intervals, argparser, stats, 
+- bowtie v1
+  - Please make sure the path variable includes the location for `bowtie`.
+
+### Notes: 
+- Input parsing in the program is pretty basic, so please try to match the format with the given examples.
+- The program has been tested on CentOS Linux (64 bit) using R v3.5.1 and bowtie v1.2.2.
