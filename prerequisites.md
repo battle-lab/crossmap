@@ -1,4 +1,4 @@
-### Input requirements
+# Prerequisites
 The following items are required to compute cross-mappability genomewide.
 #### Genome sequences (Format: FASTA)
 The genome sequences should be stored in a directory. The genome sequence for each chromosome should be in a fasta file in a directory. The file name for each chromosome should be CHRNAME.fa. For example, file names for human genome would look like below:
@@ -57,7 +57,7 @@ Further instructions to convert bigwig files are available [here](https://genome
 Bowtie index files are required to align k-mers to the genome. You may either download prebuilt bowtie indexes from the [bowtie website](http://bowtie-bio.sourceforge.net/index.shtml) or create an index using for your genome following instructions from the bowtie wesbite.
 
 
-### Software requirements
+#### Software requirements (Linux, R, bowtie)
 - Linux
 - R
   - Please make sure the path variable includes the location for `Rscript`.
@@ -65,6 +65,6 @@ Bowtie index files are required to align k-mers to the genome. You may either do
 - bowtie v1
   - Please make sure the path variable includes the location for `bowtie`.
 
-### Notes: 
+#### Notes: 
 - Input parsing in the program is pretty basic, so please try to match the format with the given examples.
 - The program has been tested on CentOS Linux (64 bit) using R v3.5.1 and bowtie v1.2.2.
