@@ -121,6 +121,7 @@ echo "Rscript \"$prog_dir/gtf_to_txt.R\" -gtf \"$gene_annot_fn\" \
                      2>&1 | tee \"$log_fn\"" > "$script_fn"
 run_script "$script_fn" $slurm_partition 1 1 "0:10:0" "8GB"  
 # Time: 3 min
+```
 Note: please wait for the above script to finish before moving to the next step.
 
 ### 3. Generate gene-mappability from k-mer mappability
