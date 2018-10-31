@@ -31,6 +31,9 @@ args <- add_argument(args, '-mismatch',
 args <- add_argument(args, '-max_chr', 
                      help='maximum number of chromosomes to load in memory',
                      default=7)
+args <- add_argument(args, '-max_gene', 
+                     help='maximum number of genes to align before cleaning alignments',
+                     default=100)
 args <- add_argument(args, '-initonly', 
                      help='initialize required resources only, without computing cross-mappability',
                      default=FALSE)
@@ -55,6 +58,7 @@ n1 <- argv$n1
 n2 <- argv$n2
 max_mismatch <- argv$mismatch
 max_chr <- argv$max_chr
+max_gene_alignment <- argv$max_gene
 init_only_input <- argv$initonly
 dir_name_len <- argv$dir_name_len
 verbose = argv$verbose
@@ -69,6 +73,7 @@ stopifnot(dir.exists(alignment_dir))
 stopifnot(dir.exists(dirname(bowtie_index_prefix)))
 stopifnot(is.numeric(dir_name_len) & dir_name_len>=1)
 stopifnot(is.numeric(max_chr) & max_chr>=1)
+stopifnot(is.numeric(max_gene_alignment) & max_gene_alignment>=1)
 stopifnot(max_mismatch %in% 0:3)
 stopifnot(is.numeric(n1))
 stopifnot(is.numeric(n2))
@@ -283,13 +288,14 @@ if(resource_initialization_only){
   quit(save = 'no', status=0)
 }
 
-n_genes_per_batch = 1000
+n_genes_per_batch = max_gene_alignment
 for(batch in 1:ceiling(length(target_genes)/n_genes_per_batch)){
   batch_target_genes <- target_genes[((batch-1)*n_genes_per_batch+1):min((batch*n_genes_per_batch), length(target_genes))]
-  for(chr_batch in 1:ceiling(length(chromosomes)/max_chr)){
+  max_chr_batch = ceiling(length(chromosomes)/max_chr)
+  for(chr_batch in 1:max_chr_batch){
     batch_chromosomes <- chromosomes[((chr_batch-1)*max_chr+1):min((chr_batch*max_chr), length(chromosomes))]
     load_chromosomes(batch_chromosomes)
-    tmp <- lapply(batch_target_genes, FUN = find_and_save_cross_mappability, chromosomes=batch_chromosomes,  delete_alignment=T, append_conflict=chr_batch!=1)
+    tmp <- lapply(batch_target_genes, FUN = find_and_save_cross_mappability, chromosomes=batch_chromosomes,  delete_alignment=chr_batch==max_chr_batch, append_conflict=chr_batch!=1)
     rm(pos2genes_by_chr)
     gc(reset = T)
     pos2genes_by_chr <- list()
