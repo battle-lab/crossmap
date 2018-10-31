@@ -2,7 +2,7 @@ get_slurm_header()
 {
   if [ $# -lt 9 ]; then 
          echo "#not enough arguments in ${FUNCNAME}."; 
-       return -1; 
+       return 1; 
        fi
        
        partition=$1
@@ -35,7 +35,7 @@ submit_slurm_job()
 {
   if [ $# -lt 1 ]; then 
     echo "No script to submit"; 
-    return -1; 
+    return 1; 
   fi
   script_fn=$1
   
