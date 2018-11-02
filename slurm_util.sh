@@ -68,10 +68,10 @@ submit_slurm_job()
   cmd_body="$cmd_body\necho DONE"
 
   # save slurm job
-  echo -e "$cmd_header" > $slurm_job_fn
-  echo -e "$cmd_modules" >> $slurm_job_fn
-  echo -e "$cmd_body" >> $slurm_job_fn
-  
+  printf "$cmd_header\n" > $slurm_job_fn
+  printf "$cmd_modules\n" >> $slurm_job_fn
+  printf "$cmd_body\n" >> $slurm_job_fn
+
   # submit slurm job
   sbatch $slurm_job_fn
   
