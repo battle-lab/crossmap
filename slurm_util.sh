@@ -59,7 +59,8 @@ submit_slurm_job()
   cmd_header=$(get_slurm_header ${partition} ${script_dir} ${time} ${nodes} ${ntasks} ${mem} ${job_name} "${slurm_job_fn}.%%j.out" "${slurm_job_fn}.%%j.err")
 
   # slurm modules
-  cmd_modules="module load R"
+  cmd_modules="module load gcc"
+  cmd_modules="$cmd_modules\nmodule load R"
   cmd_modules="$cmd_modules\nmodule load bowtie1/1.2.2"
   cmd_modules="$cmd_modules\n"
   
