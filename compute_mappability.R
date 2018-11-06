@@ -4,7 +4,6 @@
 ### took an weighted average of both mappabilities. weights are proportional to lengths.
 
 suppressMessages(library(data.table))
-suppressMessages(library(stringr))
 suppressMessages(library(intervals))
 suppressMessages(library(stats))
 suppressMessages(library(argparser))

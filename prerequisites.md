@@ -61,7 +61,7 @@ Bowtie index files are required to align k-mers to the genome. You may either do
 - Linux
 - R
   - Please make sure the path variable includes the location for `Rscript`.
-  - Please make sure the following R packages are installed: data.table, stringr, intervals, argparser, stats, 
+  - Please make sure the following R packages are installed: data.table, intervals, argparser, stats, 
 - bowtie v1
   - Please make sure the path variable includes the location for `bowtie`.
 
