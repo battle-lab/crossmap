@@ -35,7 +35,7 @@ chr1    HAVANA  transcript      11869   14409   .       +       .       gene_id 
 chr1    HAVANA  exon    11869   12227   .       +       .       gene_id "ENSG00000223972.4"; transcript_id "ENST00000456328.2"; gene_type "pseudogene"; gene_status "KNOWN"; gene_name "DDX11L1"; transcript_type "processed_transcript"; transcript_status "KNOWN"; transcript_name "DDX11L1-002"; exon_number 1; exon_id "ENSE00002234944.1"; level 2; tag "basic"; havana_gene "OTTHUMG00000000961.2"; havana_transcript "OTTHUMT00000362751.1";
 ```
 
-#### Mappability of each k-mer (Format: BEDGRAPH or BIGWIG)
+#### Mappability of each k-mer (Format: BEDGRAPH)
 A tab-delimitted [bedgraph](http://genome.ucsc.edu/goldenPath/help/bedgraph.html) file containing the mappability of each k-mer is required. The bedgraph file should have 4 columns: chr, start_pos, end_pos, mappability. The bedgraph file should look like below:
 ```
 chr1	0	10	0.25
