@@ -44,13 +44,34 @@ chr1	27	43	0.5
 ```
 Here, the first 10 k-mers have a mappability of 0.25, next 17 k-mers have a mappability of 1, and the next 16 k-mers have a mappability of 0.5. Note: a track definition line is not expected.
 
-bigwig to bedgraph: If you have k-mer mappabilities in a [bigWig](https://genome.ucsc.edu/goldenpath/help/bigWig.html) file, you may easily convert it into a bedgraph file using the following shell script:
+You may download precomputed bedgraph (or bigwig) files for human genomes for certain settings from one the following links: 1) [hg19, k=2, mismatch=2](http://bit.ly/hg19_mappability), 2) [hg19, different k's and mismatches](https://figshare.com/articles/Cross_Mappability_hg19_gencode19/7315049).
+
+If the k-mer mappability bed file for your reference genome with desired k and number of mismatches is not available in any of the above links, you may generate it by following instructions from [here](https://wiki.bits.vib.be/index.php/Create_a_mappability_track). For convenience, we summarized necessary instructions here. Before proceeding, please get the binary files of the [GEM Library](https://sourceforge.net/projects/gemlibrary/files/gem-library/Binary%20pre-release%203/) and [UCSC command-line tools (wigToBigWig and bigWigToBedGraph)](http://hgdownload.soe.ucsc.edu/admin/exe/). Please add the paths in the "$PATH" variable, and execute the following script with your settings.
+
 ```
-bigwig_fn="mappability.bigwig"  # filename (with path) of your bigwig file
-bedgraph_fn="mappability.bed"   # filename (with path) of the bed file
-bigWigToBedGraph  "$bedgraph_fn" "$bedgraph_fn"
+export PATH=/your/GEM_library/bin:$PATH   # put the path of GEM Libary binaries
+export PATH=/your/ucsc_binary:$PATH       # put the path of UCSC tools binaries
+
+
+genome_fasta="your/reference/genome/ref_all_chr.fa" # put the path of the reference fasta file with all chromosomes.
+k=75                                                # put the value of k
+n_mismatch=2                                        # put the maximum number of mismatches allowed
+n_threads=16                                        # put the number of threads
+output_dir="your/output/directory"                  # put the output directory
+gem_index_pref="ref_gem_index"                      # put the prefix of GEM index
+gem_mappability_pref="mappability_75mer_2mismatch"  # put the prefix of mappability files
+
+# index the refernce genome (execute once for one fasta file): -- approx time: ~40 min
+gem-indexer -T $n_threads -c dna -i "$genome_fasta" -o "$output_dir/$gem_index_pref"   # ~40 min
+# compute mappability -- approx time: ~6 hr
+gem-mappability -m "$n_mismatch" -T $n_threads -I "$output_dir/$gem_index_pref.gem" -l $k -o "$output_dir/$gem_mappability_pref"
+# convert mappability file to bed, step by step
+gem-2-wig -I "$output_dir/$gem_index_pref.gem" -i "$output_dir/$gem_mappability_pref.mappability" -o "$output_dir/$gem_mappability_pref"
+wigToBigWig "$output_dir/$gem_mappability_pref.wig" "$output_dir/$gem_mappability_pref.sizes" "$output_dir/$gem_mappability_pref.bigWig"
+bigWigToBedGraph "$output_dir/$gem_mappability_pref.bigWig" "$output_dir/$gem_mappability_pref.bed"
+
 ```
-Further instructions to convert bigwig files are available [here](https://genome.ucsc.edu/goldenpath/help/bigWig.html). Mappabilities of k-mers in human genome hg19 are available [here](http://bit.ly/hg19_mappability) in bigwig files.
+The bedgraph file will be available in your output directory with .bed extension.
 
 
 #### Bowtie index
